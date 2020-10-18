@@ -72,6 +72,20 @@
                 return false;
             }
         };
+        
+        function getPlayerSelection(){
+            let choiceCheck = prompt("Please select between rock, paper, scissors.");
+
+            if(choiceCheck){
+                if(validChoice(choiceCheck)){
+                    return choiceCheck.toLowerCase().trim();
+                } else {
+                    return getPlayerSelection();
+                }
+            } else {
+                return getPlayerSelection();
+            }
+        };
     </script>
 </body>
 </html>
