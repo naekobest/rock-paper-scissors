@@ -40,6 +40,28 @@
             }
             return playerWins;
         }
+        
+        function playround(playerSelection, computerSelection){
+            const playerChoiceClean = playerSelection.toLowerCase();
+            const compChoiceClean = computerSelection.toLowerCase();
+            let roundResult;
+
+            if (playerSelection == computerSelection){
+                globalTies += 1;
+                roundResult = "Both players choose the same. The result is a tie.";
+            } else {
+                let playerWins = getWinner(playerChoiceClean, compChoiceClean);
+
+                if(playerWins){
+                    globalPlayerScore += 1;
+                    roundResult = "You win! " + playerChoiceClean + " beats " + compChoiceClean;
+                } else {
+                    roundResult = "You Lose! " + compChoiceClean + " beats " + playerChoiceClean;
+                    globalCompScore += 1;
+                }
+            }
+            return roundResult;
+        }
     </script>
 </body>
 </html>
