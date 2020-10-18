@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors</title>
+
+    <style>
+        #hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Welome to the Rock-Paper-Scissors game!</h1>
@@ -13,9 +19,9 @@
 
     <div id="hidden">
         <h2>
-            <p>You won <span class="player-wins-count"></span> games.</p>
-            <p>The computer won <span class="computer-wins-count"></span> games.</p>
-            <p>There were <span class="ties-count"></span> tied games.</p>
+            <p>You won <span id="player-wins-count"></span> games.</p>
+            <p>The computer won <span id="comp-wins-count"></span> games.</p>
+            <p>There were <span id="ties-count"></span> tied games.</p>
         </h2>
     </div>
 
