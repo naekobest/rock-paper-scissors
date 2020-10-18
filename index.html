@@ -6,6 +6,19 @@
     <title>Rock-Paper-Scissors</title>
 </head>
 <body>
+    <h1>Welome to the Rock-Paper-Scissors game!</h1>
+    <p>To play 5 intense rounds against me, click the button below.</p>
+
+    <button id="start-button">Play game</button>
+
+    <div id="hidden">
+        <h2>
+            <p>You won <span class="player-wins-count"></span> games.</p>
+            <p>The computer won <span class="computer-wins-count"></span> games.</p>
+            <p>There were <span class="ties-count"></span> tied games.</p>
+        </h2>
+    </div>
+
     <script>
 
         let globalPlayerScore = 0;
@@ -41,7 +54,7 @@
             return playerWins;
         }
         
-        function playround(playerSelection, computerSelection){
+        function playRound(playerSelection, computerSelection){
             const playerChoiceClean = playerSelection.toLowerCase();
             const compChoiceClean = computerSelection.toLowerCase();
             let roundResult;
@@ -86,6 +99,27 @@
                 return getPlayerSelection();
             }
         };
+
+        function gameLoop(){
+            globalPlayerScore = 0;
+            globalCompScore = 0;
+            globalTies = 0;
+            document.querySelector("#hidden").style.display = "none";
+
+            for(let i=1; i<6; i++){
+                const playerSelection = getPlayerSelection();
+                const computerSelection = computerPlay();
+                alert("Game " + i + "\n" + playRound(playerSelection, computerSelection))
+            }
+
+            alert("The match is over. Thank you for playing. The resulsts will be shown below.");
+            document.querySelector("#hidden").style.display = "block";
+            document.querySelector("#player-wins-count").textContent = globalPlayerScore;
+            document.querySelector("#comp-wins-count").textContent = globalCompScore;
+            document.querySelector("#ties-count").textContent = globalTies;
+        };
+
+        document.querySelector("#start-button").addEventListener("click", gameLoop);
     </script>
 </body>
 </html>
