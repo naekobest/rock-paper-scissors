@@ -3,129 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock-Paper-Scissors</title>
-
-    <style>
-        #hidden {
-            display: none;
-        }
-    </style>
+    <title>Rock Paper Scissors Gamee</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welome to the Rock-Paper-Scissors game!</h1>
-    <p>To play 5 intense rounds against me, click the button below.</p>
+    <header>
+        <h1>Rock Paper Scissors</h1>
+    </header>
 
-    <button id="start-button">Play game</button>
-
-    <div id="hidden">
-        <h2>
-            <p>You won <span id="player-wins-count"></span> games.</p>
-            <p>The computer won <span id="comp-wins-count"></span> games.</p>
-            <p>There were <span id="ties-count"></span> tied games.</p>
-        </h2>
+    <div class="score-board">
+        <div id="user-label" class="badge">user</div>
+        <div id="computer-label" class="badge">comp</div>
+        <span id="user-score">0</span>:<span id="computer-score">0</span>
     </div>
 
-    <script>
+    <div class="result">
+        <p>Paper covers rock. You win</p>
+    </div>
 
-        let globalPlayerScore = 0;
-        let globalCompScore = 0;
-        let globalTies = 0;
-        const globalChoices = [
-            "rock",
-            "paper",
-            "scissors"
-        ];
+    <div class="choices">
+        <div id="r" class="choice">Rock</div>
+        <div id="p" class="choice">Paper</div>
+        <div id="s" class="choice">Scissors</div>
+    </div>
 
-        function computerPlay(){
-            const randNum = Math.random();
-            return globalChoices[Math.floor(globalChoices.length * randNum)];
-        }
-
-        function getWinner(playerChoice, compChoice){
-            let playerWins;
-
-            if (playerChoice == "rock" && compChoice == "paper"){
-                playerWins = false;
-            } else if (playerChoice == "rock" && compChoice == "scissors"){
-                playerWins = true;
-            } else if (playerChoice == "paper" && compChoice == "scissors"){
-                playerWins = false;
-            } else if (playerChoice == "paper" && compChoice == "rock"){
-                playerWins = true;
-            } else if (playerChoice == "scissors" && compChoice == "rock"){
-                playerWins = false;
-            } else if (playerChoice == "scissors" && compChoice == "paper"){
-                playerWins = true;
-            }
-            return playerWins;
-        }
-        
-        function playRound(playerSelection, computerSelection){
-            const playerChoiceClean = playerSelection.toLowerCase();
-            const compChoiceClean = computerSelection.toLowerCase();
-            let roundResult;
-
-            if (playerSelection == computerSelection){
-                globalTies += 1;
-                roundResult = "Both players choose the same. The result is a tie.";
-            } else {
-                let playerWins = getWinner(playerChoiceClean, compChoiceClean);
-
-                if(playerWins){
-                    globalPlayerScore += 1;
-                    roundResult = "You win! " + playerChoiceClean + " beats " + compChoiceClean;
-                } else {
-                    roundResult = "You Lose! " + compChoiceClean + " beats " + playerChoiceClean;
-                    globalCompScore += 1;
-                }
-            }
-            return roundResult;
-        }
-
-        function validChoice(choice){
-            let cleanedChoice = choice.toLowerCase().trim();
-            
-            if(globalChoices.includes(cleanedChoice)){
-                return true;
-            } else {
-                return false;
-            }
-        };
-        
-        function getPlayerSelection(){
-            let choiceCheck = prompt("Please select between rock, paper, scissors.");
-
-            if(choiceCheck){
-                if(validChoice(choiceCheck)){
-                    return choiceCheck.toLowerCase().trim();
-                } else {
-                    return getPlayerSelection();
-                }
-            } else {
-                return getPlayerSelection();
-            }
-        };
-
-        function gameLoop(){
-            globalPlayerScore = 0;
-            globalCompScore = 0;
-            globalTies = 0;
-            document.querySelector("#hidden").style.display = "none";
-
-            for(let i=1; i<6; i++){
-                const playerSelection = getPlayerSelection();
-                const computerSelection = computerPlay();
-                alert("Game " + i + "\n" + playRound(playerSelection, computerSelection))
-            }
-
-            alert("The match is over. Thank you for playing. The resulsts will be shown below.");
-            document.querySelector("#hidden").style.display = "block";
-            document.querySelector("#player-wins-count").textContent = globalPlayerScore;
-            document.querySelector("#comp-wins-count").textContent = globalCompScore;
-            document.querySelector("#ties-count").textContent = globalTies;
-        };
-
-        document.querySelector("#start-button").addEventListener("click", gameLoop);
-    </script>
+    <p id="action-message">Make your move.</p>
+    <script src="js.js"></script>
 </body>
 </html>
